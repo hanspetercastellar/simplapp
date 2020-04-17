@@ -47,20 +47,23 @@ class Sidebar extends React.Component {
     // creates the links that appear in the left menu / Sidebar
     createLinks = routes => {
         return routes.map((prop, key) => {
-            return (
-                <Nav.Item key={key}>
-                    <Link
-                        to={prop.layout + prop.path}
-                        tag={NavLinkRRD}
-                        onClick={this.closeCollapse}
-                        active
-                        className={this.activeRoute(prop.layout + prop.path)}
-                    >
-                        <i className={prop.icon} />
-                        {prop.name}
-                    </Link>
-                </Nav.Item>
-            );
+            if(prop.layout==='/'){
+                return (
+                    <Nav.Item key={key}>
+                        <Link
+                            to={prop.layout + prop.path}
+                            tag={NavLinkRRD}
+                            onClick={this.closeCollapse}
+                            active
+                            className={this.activeRoute(prop.layout + prop.path)}
+                        >
+                            <i className={prop.icon} />
+                            {prop.name}
+                        </Link>
+                    </Nav.Item>
+                );
+            }
+
         });
     };
     render() {
@@ -103,8 +106,8 @@ class Sidebar extends React.Component {
                         <Nav className="align-items-center d-md-none">
                           HAns peter
                         </Nav>
-                        {/* Collapse */}
-                        <Navbar.Collapse   isOpen={this.state.collapseOpen} className={'menu-main'}>
+                        {/* Collapse  isOpen={this.state.collapseOpen}  */}
+                        <Navbar.Collapse   className={'menu-main'}>
                             <div className="navbar-collapse-header d-md-none">
                                 <Row>
                                     {logo ? (

@@ -1,38 +1,47 @@
 import React from "react";
-import {Nav, Navbar} from "react-bootstrap";
+import {Button, Container, Nav, Navbar} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 
-const Header = ({children}) => {
+const Header = ({
+                    children,
+                    bg,
+                    styles,
+                    classes,
+                    titulo,
+                    vista,
+                    CallbackButton,
+                    labelButton,
+                    linkBton
+
+}) => {
 
     return(
         <>
-            <Nav
+            <header
                 activeKey="/home"
                 onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-                className={'mt-md-3 mb-md-3 header-interno bg-white rounded-sm'}
-                bg={'white'}
+                className= {classes ? classes:''}
+                styles = {styles?styles:{}}
             >
                 {children ? children :
-                <div className={'d-flex'}>
-                    <Nav.Item>
-                        <Nav.Link href="/home">Active</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="link-1">Link</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="link-2">Link</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="disabled" disabled>
-                            Disabled
-                        </Nav.Link>
-                    </Nav.Item>
-                </div>
+
+                    <Container fluid={'fluit'} className={'d-flex justify-content-between  '}>
+                        <div className={'d-flex flex-column '}>
+                            <small>{vista}</small>
+                            <h4 style={{'color':''}}>{titulo}</h4>
+                        </div>
+                        <Button
+                        onClick={()=>(alert())}
+                        >
+                         <Link to={linkBton}>
+                             {labelButton}
+                         </Link>
+                        </Button>
+                    </Container>
 
                 }
-
-            </Nav>
+            </header>
         </>
     );
 

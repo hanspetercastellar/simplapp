@@ -23,7 +23,7 @@ const App = () =>  {
   return(
       <BrowserRouter>
         <Switch>
-          <Route path="/Admin" render={props => <DashboardLayout {...props} />} />
+          <Route path="/" render={props => <DashboardLayout {...props} />} />
           <Route path="/auth" render={props => <AuthLayout {...props} />} />
         </Switch>
       </BrowserRouter>

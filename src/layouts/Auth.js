@@ -8,7 +8,6 @@ import separator from '../assets/img/separator.svg'
 export default class AuthLayout extends React.Component{
 
     render() {
-        console.log(this.props)
         return(
             <>
                 <div className="main-content">

@@ -1,0 +1,23 @@
+$color-normal:#555;
+
+form{
+
+    label{
+      font-size: 14px;
+    }
+    small{
+      color: $color-normal;
+      font-size: 11px;
+      margin-left: 3px;
+    }
+    span.error{
+      color: #ff5f5b;
+      font-size: 12px;
+    }
+    .form-control{
+      height: 30px;
+      font-size: 12px;
+    }
+
+
+}

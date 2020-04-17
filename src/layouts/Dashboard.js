@@ -12,32 +12,34 @@
 *
 */
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import { NavLink as NavLinkRRD, Link } from "react-router-dom";
+import {Route, Switch, Redirect} from "react-router-dom";
+import {NavLink as NavLinkRRD, Link} from "react-router-dom";
 import '../assets/admin.css';
-// nodejs library to set properties for components
-import { PropTypes } from "prop-types";
 
 //Bootstapp-react components
 import {Container} from "react-bootstrap";
 
 //Core components
 import AdminNavbar from "../components/NavBars/AdminNavbar.js";
+
 //import AdminFooter from "../components/Footers/AdminFooter.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
-
 import routes from "../Routes/webRoute.js";
 
-export default class DashboardLayout extends React.Component{
+//External library
+import { MotionLayoutProvider } from 'react-motion-layout'
+
+export default class DashboardLayout extends React.Component {
 
     componentDidUpdate(e) {
         document.documentElement.scrollTop = 0;
         document.scrollingElement.scrollTop = 0;
         this.refs.mainContent.scrollTop = 0;
     }
+
     getRoutes = routes => {
         return routes.map((prop, key) => {
-            if (prop.layout === "/Admin") {
+            if (prop.layout === "/") {
                 return (
                     <Route
                         path={prop.layout + prop.path}
@@ -70,7 +72,7 @@ export default class DashboardLayout extends React.Component{
                     {...this.props}
                     routes={routes}
                     logo={{
-                        innerLink: "/Admin/index",
+                        innerLink: "/Dashboard",
                         imgSrc: require("../assets/img/logos/logo.png"),
                         imgAlt: "..."
                     }}
@@ -80,12 +82,16 @@ export default class DashboardLayout extends React.Component{
                         {...this.props}
                         brandText={this.getBrandText(this.props.location.pathname)}
                     />
-                    <Switch>
-                        {this.getRoutes(routes)}
-                        <Redirect from="*" to="/admin/index" />
-                    </Switch>
+                    <Container className={'pt-md-5 pt-sm-3 pt-xs-5'}>
+                            <Switch>
+                                {this.getRoutes(routes)}
+                                <Redirect from="*" to="/dashboard"/>
+                            </Switch>
+
+                    </Container>
+
                     <Container fluid>
-                       {/* <AdminFooter />*/}
+                        {/* <AdminFooter />*/}
                     </Container>
                 </div>
             </>
