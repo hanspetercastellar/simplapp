@@ -21,13 +21,11 @@ const TercerosView = () => {
       {/*      <Header titulo={'Terceros'} vista={'Listado'} labelButton={'Crear Nuevo'} linkBton={'/Terceros/Nuevo'}/>*/}
             <Switch>
                 <Route
-                    exact
                     path={'/Terceros/Home'}
                     component={Table}
                 />
                 <Route
-                    exact
-                    path={'/Terceros/Nuevo'}
+                    path={'/Terceros/:Nuevo'}
                     component={FormNewTercero}
                 />
                 <Redirect from="*" to="/Terceros/Home" />

@@ -5,9 +5,12 @@ import AuthNavbar from "../components/NavBars/AuthNavbar";
 import AuthFooter from "../components/Footers/AuthFooter";
 import '../assets/auth.css'
 import separator from '../assets/img/separator.svg'
-export default class AuthLayout extends React.Component{
+import Auth from '../components/Forms/auth/authForm.component'
 
-    render() {
+export default function AuthLayout(props){
+
+
+    
         return(
             <>
                 <div className="main-content">
@@ -34,51 +37,7 @@ export default class AuthLayout extends React.Component{
                                             Inicia Session
                                     </Card.Header>
                                     <Card.Body>
-                                        <Form>
-                                            <Form.Group controlId="formBasicEmail" className={'mb-3'}>
-                                                <InputGroup className={'input-group-alternative'}>
-                                                    <InputGroup.Prepend>
-                                                        <InputGroup.Text id="inputGroupPrepend">
-                                                            <i className="fas fa-envelope"></i>
-                                                        </InputGroup.Text>
-                                                    </InputGroup.Prepend>
-                                                    <Form.Control
-                                                        type="text"
-                                                        placeholder="Correo"
-                                                        aria-describedby="inputGroupPrepend"
-                                                        name="username"
-                                                    />
-                                                    <Form.Control.Feedback type="invalid">
-                                                        {}
-                                                    </Form.Control.Feedback>
-                                                </InputGroup>
-                                            </Form.Group>
-
-                                            <Form.Group controlId="formBasicPassword">
-                                                <InputGroup className={'input-group-alternative'}>
-                                                    <InputGroup.Prepend>
-                                                        <InputGroup.Text id="inputGroupPrepend">
-                                                            <i className="fas fa-key"></i>
-                                                        </InputGroup.Text>
-                                                    </InputGroup.Prepend>
-                                                    <Form.Control
-                                                        type="text"
-                                                        placeholder="Contraseña"
-                                                        aria-describedby="inputGroupPrepend"
-                                                        name="username"
-                                                    />
-                                                    <Form.Control.Feedback type="invalid">
-                                                        {}
-                                                    </Form.Control.Feedback>
-                                                </InputGroup>
-                                            </Form.Group>
-                                            <Form.Group controlId="formBasicCheckbox">
-                                                <Form.Check type="checkbox" label="Recordar Session" />
-                                            </Form.Group>
-                                            <Button variant="info" type="submit">
-                                                Ingresar
-                                            </Button>
-                                        </Form>
+                                        <Auth {...props}/>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -88,7 +47,7 @@ export default class AuthLayout extends React.Component{
                 <AuthFooter/>
             </>
         )
-    }
+    
 
 }
 

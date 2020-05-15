@@ -50,7 +50,7 @@ class Sidebar extends React.Component {
             if(prop.layout==='/'){
                 return (
                     <Nav.Item key={key}>
-                        <Link
+                        <NavLinkRRD
                             to={prop.layout + prop.path}
                             tag={NavLinkRRD}
                             onClick={this.closeCollapse}
@@ -59,7 +59,7 @@ class Sidebar extends React.Component {
                         >
                             <i className={prop.icon} />
                             {prop.name}
-                        </Link>
+                        </NavLinkRRD>
                     </Nav.Item>
                 );
             }
@@ -131,15 +131,17 @@ class Sidebar extends React.Component {
 
                                         </Navbar.Toggle>
                                         <ToastHeader>
-
+sdfsdfsdfsds
                                         </ToastHeader>
                                     </Col>
                                 </Row>
                             </div>
                             {/* Form */}
-                            <Nav style={{flexDirection: 'column'}}>{this.createLinks(routes)}</Nav>
+                            <Nav style={{flexDirection: 'column'}}>
+                                {this.createLinks(routes)}
+                            </Nav>
                         </Navbar.Collapse>
-                        <small style={{color:'#8898aa'}}>Desarrollado por Hcastellar © 2020 </small>
+                
                     </Container>
 
                 </Navbar>

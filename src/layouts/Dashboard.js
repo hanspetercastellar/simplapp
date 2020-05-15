@@ -85,7 +85,8 @@ export default class DashboardLayout extends React.Component {
                     <Container className={'pt-md-5 pt-sm-3 pt-xs-5'}>
                             <Switch>
                                 {this.getRoutes(routes)}
-                                <Redirect from="*" to="/dashboard"/>
+                                <Redirect from="*" to="/Dashboar"/>
+                                <Route path="*" component={() => "404 NOT FOUND"} />
                             </Switch>
 
                     </Container>
