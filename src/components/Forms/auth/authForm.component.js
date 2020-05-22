@@ -1,58 +1,33 @@
 import React, { useEffect } from 'react'
-import axios from 'axios'
-
+import { useSelector, useDispatch } from 'react-redux';
 //Libreria react-hook-form
 import { useForm } from "react-hook-form"
 import {Form,Button,InputGroup} from "react-bootstrap";
 
-//initializations
-import { setUserSession, getToken  } from '../../../helpers/auth.helper'
+//silices
+import {  loginFetch, selectAuth  } from '../../../redux/feature/auth/auth.slice'
 
 export default function Auth(props){
 
     const { register, handleSubmit, errors } = useForm();
     const { email, password } = errors;
-
+    const dispatch = useDispatch()
+    const usuario = useSelector(selectAuth)
     const onSubmit = async data => {
-        try{
-               axios.post("http://localhost:5000/api/auth/login",data)
-                    .then((res) => {
-                        res = res.data;
-                        if(res.auth){
-                            setUserSession(res.token,res.user, res.tenants)
-                            props.history.push("/dashboard")
-                        }
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    })
 
-        }catch(error) {
-            console.log(error)
-        }
-      
+         await dispatch(loginFetch(data, props.history))
+    
     }
 
     useEffect(()=>{
-        console.log(props)
-        async function loadUser(){
-             if(!getToken()) {
-                return;
-              }
-
-              try{
-                
-              }catch(error) {
-
-              }
-        }
-       
-    },[])
+      console.log(usuario)
+    },[usuario])
 
     
     return (
 
         <>
+       
         <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group controlId="formBasicEmail" className={'mb-3'}>
                 <InputGroup className={'input-group-alternative'}>

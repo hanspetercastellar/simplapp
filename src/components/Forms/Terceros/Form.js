@@ -3,10 +3,11 @@ import Header from "../../Headers/Header";
 import {Button, Card, Col, Container, Form, FormControl, FormLabel, Row} from "react-bootstrap";
 import './Form.css'
 
+
 //Libreria react-hook-form
 import {useForm} from "react-hook-form"
 
-
+//vars
 const tipoTerceroCheck = [
     {
         label:'Proveedor',
@@ -30,10 +31,11 @@ const tipoTerceroCheck = [
     }
 ]
 
+
 const style = {}
 
 const FormNewTercero = () =>{
-    const { register,handleSubmit, errors,setValue} = useForm({
+    const { register,handleSubmit,reset, errors,setValue} = useForm({
         defaultValues:{
             departamento:'departamento2'
         }
@@ -45,10 +47,15 @@ const FormNewTercero = () =>{
         })
         setTipoTercero(e.target.value)
     }
-
-    const onSubmit = dataForm => {
-        setValue('nombre',true)
-        console.log(dataForm)
+    
+    let onSubmit = dataForm => {
+        let tipos_terceros=[];
+        for (var i = 1; i <= 4; i++){
+            if(dataForm["tercero_"+i]){
+                tipos_terceros.push(i)
+            }
+        }
+        
     }
 
     return(
@@ -66,7 +73,7 @@ const FormNewTercero = () =>{
             </Header>*/}
             <form className={'form-tercero'} onSubmit={handleSubmit(onSubmit)} >
                 <Row className={'mt-sm-3'}>
-                        <Col xs={'12'} lg={'6'}>
+                        <Col xs={'12'} lg={'6'} className="mb-sm-2">
                             <Card>
                                 <Card.Header>
                                     Datos Basicos

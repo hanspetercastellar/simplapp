@@ -1,9 +1,16 @@
 $color-normal:#555;
 
+.card{
+  .card-header{
+    border-bottom: 0px;
+  }
+}
+
 form{
 
     label{
       font-size: 14px;
+      color: #555;
     }
     small{
       color: $color-normal;

@@ -13,19 +13,18 @@ const SingoutButton = ({children, history}) => {
     }
 
     return (
-        <Dropdown>
-            <Button variant="secundary">{nameTenant}</Button>
-            
-            <Button variant="secundary">{name}</Button>
-
-            <Dropdown.Toggle split variant="primary" id="dropdown-split-basic" />
-
-            <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#" onClick={handleCLic}>Salir</Dropdown.Item>
-            </Dropdown.Menu>
+        <>
+         <Button variant="secundary">{nameTenant}</Button>
+        <Dropdown>            
+                <Button variant="secundary">{name}</Button>
+                <Dropdown.Toggle split variant="primary" id="dropdown-split-basic" />
+                <Dropdown.Menu className="dropdown-menu-right">
+                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                    <Dropdown.Item href="#" onClick={handleCLic}>Salir</Dropdown.Item>
+                </Dropdown.Menu>
         </Dropdown>
+        </>
     )
 
 }

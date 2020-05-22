@@ -8,37 +8,48 @@ body {
   padding-bottom: 6rem !important;
   padding-top: 6rem !important;
 }
+
 @media (min-width: 992px) {
   .main-content > .header {
     padding-bottom: 8rem !important;
     padding-top: 8rem !important;
   }
 }
+
 .main-content .form-login {
   color: #8898aa;
   margin-top: -5rem !important;
 }
+
 .main-content .form-login .input-group-alternative {
-  box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
+  -webkit-box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
+          box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
   border: 0;
-  -webkit-transition: box-shadow 0.15s ease;
-  transition: box-shadow 0.15s ease;
+  -webkit-transition: box-shadow .15s ease;
+  -webkit-transition: -webkit-box-shadow .15s ease;
+  transition: -webkit-box-shadow .15s ease;
+  transition: box-shadow .15s ease;
+  transition: box-shadow .15s ease, -webkit-box-shadow .15s ease;
 }
+
 .main-content .form-login .input-group-alternative .input-group-prepend .input-group-text {
   border: 0;
-  box-shadow: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
   background: transparent;
   color: #adb5bd;
 }
+
 .main-content .form-login .input-group-alternative input {
   font-family: Lato;
-  box-shadow: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
   border: 0;
   color: #adb5bd !important;
 }
+
 .main-content .form-login .input-group-alternative input[placeholder] {
   font-family: Lato;
   color: #8898aa !important;
 }
-
 /*# sourceMappingURL=auth.css.map */

@@ -1,5 +1,9 @@
- 
+var { setJWT, removeJWT } = require('../config/axios.config');
+
  module.exports = {
+    //propiedades
+    token: "",
+
     // retorma el usuario que esta logeado
     getUser(){
         const userStr = sessionStorage.getItem('user');
@@ -23,8 +27,10 @@
 
     //remueve el token y el susuario de las variables de sessionstorage
     removeUserSession(){
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('user');
+             sessionStorage.removeItem('token');
+             sessionStorage.removeItem('user');
+             sessionStorage.removeItem('tenantSelected')
+             removeJWT()
     },
 
     //set el token y la session del usuario logeado
@@ -32,5 +38,8 @@
         sessionStorage.setItem('token',token);
         sessionStorage.setItem('user', JSON.stringify(user))
         sessionStorage.setItem('tenantSelected',JSON.stringify(tenant))
+
+        //setea la cabecera x_access_token con el token suministrado por el server
+        setJWT(token)
     }
  }

@@ -1,18 +1,25 @@
+.card .card-header {
+  border-bottom: 0px;
+}
+
 form label {
   font-size: 14px;
+  color: #555;
 }
+
 form small {
   color: #555;
   font-size: 11px;
   margin-left: 3px;
 }
+
 form span.error {
   color: #ff5f5b;
   font-size: 12px;
 }
+
 form .form-control {
   height: 30px;
   font-size: 12px;
 }
-
 /*# sourceMappingURL=Form.css.map */
