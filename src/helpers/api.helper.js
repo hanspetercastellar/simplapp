@@ -1,12 +1,37 @@
-const  { Daxios } = require('../config/axios.config');
-const { setUserSession, getToken  } = require("./auth.helper")
+import request from './requests.helper';
+import getHistory from 'react-router-global-history';
+const { removeUserSession } = require('./auth.helper');
 
-module.exports  =  {
+//instancias
+const http = new request();
 
-           async fetchSingIn(data) {
-        
-              const res = await Daxios.post("/auth/login",data)
-              return res
-    }
-
+class ApiController {
+	async fetchSingIn(data) {
+		const res = await http.post('/auth/login', data);
+		return res;
+	}
+	async getDepartamentos(history) {
+		try {
+			const res = await http.get('/resources/departamentos');
+			if (res.error && res.statusCode == 503) {
+				removeUserSession(() => {
+					alert('La Session Ha expirado');
+					getHistory().push('/login');
+				});
+			}
+			return res.result;
+		} catch (error) {
+			alert(error, 'api.helper:16');
+		}
+	}
+	async getMunicipiosXdepto(id) {
+		const res = await http.get('/resources/ciudades/', { id });
+		if (res.statusCode == 503) {
+			return alert(res.error);
+		}
+		console.log(res.result.data, 'api.helper');
+		return res.result;
+	}
 }
+
+export default ApiController;

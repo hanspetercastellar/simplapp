@@ -1,47 +1,47 @@
-$gradiente-background:  linear-gradient(87deg,#11cdef,#1171ef)!important;
+$gradiente-background: linear-gradient(87deg, #3988e1, #3988e1) !important;
 $primary-background: #11cdef;
-$secunday-background: #1171ef;
+$secunday-background: #3988e1;
 $color-ligth: #8898aa;
-body{
-  background: #172b4d;
-  font-family: Lato !important;
+body {
+	background: #172b4d;
+	font-family: Lato !important;
 }
-.main-content{
-  >.header{
-    @media (min-width: 992px) {
-        padding-bottom: 8rem !important;
-        padding-top: 8rem!important
-    }
-    background: $gradiente-background;
-    padding-bottom: 6rem!important;
-    padding-top: 6rem!important
-  }
-  .form-login{
-    color: $color-ligth;
-    margin-top: -5rem!important;
-    .input-group-alternative{
-      box-shadow: 0 1px 3px rgba(50,50,93,.15), 0 1px 0 rgba(0,0,0,.02);
-      border: 0;
-      -webkit-transition: box-shadow .15s ease;
-      transition: box-shadow .15s ease;
-      .input-group-prepend{
-          .input-group-text{
-            border: 0;
-            box-shadow: none;
-            background: transparent;
-            color: #adb5bd;
-          }
-      }
-      input{
-        font-family: Lato;
-        box-shadow: none;
-        border: 0;
-        color: #adb5bd !important;
-        &[placeholder]{
-          font-family: Lato;
-          color: #8898aa !important;
-        }
-      }
-    }
-  }
+.main-content {
+	> .header {
+		@media (min-width: 992px) {
+			padding-bottom: 8rem !important;
+			padding-top: 8rem !important;
+		}
+		background: $gradiente-background;
+		padding-bottom: 6rem !important;
+		padding-top: 6rem !important;
+	}
+	.form-login {
+		color: $color-ligth;
+		margin-top: -5rem !important;
+		.input-group-alternative {
+			box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
+			border: 0;
+			-webkit-transition: box-shadow 0.15s ease;
+			transition: box-shadow 0.15s ease;
+			.input-group-prepend {
+				.input-group-text {
+					border: 0;
+					box-shadow: none;
+					background: transparent;
+					color: #adb5bd;
+				}
+			}
+			input {
+				font-family: Lato;
+				box-shadow: none;
+				border: 0;
+				color: #adb5bd !important;
+				&[placeholder] {
+					font-family: Lato;
+					color: #8898aa !important;
+				}
+			}
+		}
+	}
 }

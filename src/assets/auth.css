@@ -4,7 +4,7 @@ body {
 }
 
 .main-content > .header {
-  background: linear-gradient(87deg, #11cdef, #1171ef) !important;
+  background: linear-gradient(87deg, #3988e1, #3988e1) !important;
   padding-bottom: 6rem !important;
   padding-top: 6rem !important;
 }
@@ -25,11 +25,11 @@ body {
   -webkit-box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
           box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
   border: 0;
-  -webkit-transition: box-shadow .15s ease;
-  -webkit-transition: -webkit-box-shadow .15s ease;
-  transition: -webkit-box-shadow .15s ease;
-  transition: box-shadow .15s ease;
-  transition: box-shadow .15s ease, -webkit-box-shadow .15s ease;
+  -webkit-transition: box-shadow 0.15s ease;
+  -webkit-transition: -webkit-box-shadow 0.15s ease;
+  transition: -webkit-box-shadow 0.15s ease;
+  transition: box-shadow 0.15s ease;
+  transition: box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
 }
 
 .main-content .form-login .input-group-alternative .input-group-prepend .input-group-text {

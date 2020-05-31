@@ -1,77 +1,89 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchSingIn } from '../../../helpers/api.helper'
-const { setUserSession, getToken  } = require("../../../helpers/auth.helper");
+import ApiController from '../../../helpers/api.helper';
+const { setUserSession, getToken } = require('../../../helpers/auth.helper');
 
-
+const Api = new ApiController();
 
 const authSlice = createSlice({
-    name: "auth",
+	name: 'auth',
 
-    initialState: {
-        authDetails: {
-            isLoged:false,
-            user:{},
-            tenant:{},
-            error:false
-        }
-       
-    },
+	initialState: {
+		isFetching: false,
+		authDetails: {
+			isLoged: false,
+			user: {},
+			tenant: {},
+			error: false,
+		},
+		authFailure: {
+			auth: true,
+			info: {},
+			user: {},
+		},
+	},
 
-    reducers: { 
-        loginSuccess: (state, action) => {
-            const { user, tenants, auth } = action.payload
-            state.authDetails = {
-                ...state.authDetails,
-                isLoged: auth,
-                user: user,
-                tenant:tenants
-            }
-        },
-        login: (state) => {
-            state.authDetails = {
-                ...state.authDetails,
-                isLoged: false,
-                user:{},
-                tenant:{}
-            }
-        },
-        logout: (state) => {
-            state.authDetails = {
-                ...state.authDetails,
-                isLoged: false,
-                user:{},
-                tenant:{}
-            }
-        } ,
+	reducers: {
+		loginSuccess: (state, action) => {
+			const { user, tenants, auth } = action.payload;
+			state.isFetching = false;
+			state.authDetails = {
+				...state.authDetails,
+				isLoged: auth,
+				user: user,
+				tenant: tenants,
+			};
+		},
+		loginIsFetching: state => {
+			state.isFetching = !state.isFetching;
+		},
+		loginFail: (state, action) => {
+			const { auth, info, user } = action.payload;
+			state.isFetching = false;
+			state.authFailure = {
+				...state.authFailure,
+				auth,
+				info,
+				user,
+			};
+		},
+		logout: state => {
+			state.isFetching = false;
+			state.authDetails = {
+				...state.authDetails,
+				isLoged: false,
+				user: {},
+				tenant: {},
+			};
+		},
+	},
+});
 
-    }
-})
+export const { actions, reducer } = authSlice;
 
-export const {actions, reducer} = authSlice
- 
-export const { logout, loginSuccess, login } = actions;    
+export const { logout, loginSuccess, loginIsFetching, loginFail } = actions;
 
-export const loginFetch = (data, history) => dispatch => {
+export const loginFetch = (data, history) => async dispatch => {
+	dispatch(loginIsFetching());
 
-      dispatch(login());
-      fetchSingIn(data).then((res) => {
-        res = res.data;
-        if(res.auth){
-            setUserSession(res.token,res.user, res.tenants)
-            dispatch(loginSuccess(res))
-            console.log(res)
-            history.push("/Dashboar")
-        }
-    })
-    .catch((error) => {
-        console.log(error, "error");
-        Promise.reject(error)
-    });
-      
-  };
-  
+	const response = await Api.fetchSingIn(data);
+	if (response.result) {
+		const result = response.result;
+		if (result.auth) {
+			setUserSession(result.token, result.user, result.tenants);
+			dispatch(loginSuccess(result));
+			console.log(result);
+			history.push('/Dashboard');
+		} else {
+			dispatch(loginIsFetching());
+			dispatch(loginFail(result));
+		}
+	} else if (response.statusCode == 503) {
+		alert(response.message + ' error: ' + response.statusCode);
+		dispatch(loginIsFetching());
+	}
+};
 
-  export const selectAuth = state => state.auth.authDetails;
-
-  export default reducer
+export const fetching = state => state.auth.isFetching;
+export const userAuth = state => state.auth.authFailure;
+export default reducer;

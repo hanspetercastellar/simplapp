@@ -11,27 +11,28 @@
 =========================================================
 *
 */
-import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import DashboardLayout from './layouts/Dashboard'
-import AuthLayout from './layouts/Auth'
-import DashboardContainer from './containers/DashboarContainer'
-import AuthContainer from './containers/Auth.container'
-
-
+import React from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import DashboardLayout from './layouts/Dashboard';
+import AuthLayout from './layouts/Auth';
+import DashboardContainer from './containers/DashboarContainer';
+import AuthContainer from './containers/Auth.container';
+import { ReactRouterGlobalHistory } from 'react-router-global-history';
+import 'rsuite/dist/styles/rsuite-default.css';
 //core Fonts
-import './assets/fontawesome/css/all.css'
+import './assets/fontawesome/css/all.css';
 
-const App = () =>  {
-  return(
-      <BrowserRouter>
-        <Switch>
-            <AuthContainer  path="/auth" component={AuthLayout}  />
-            <DashboardContainer path="/" component={DashboardLayout}  />
-            <Route path="*" component={() => "404 NOT FOUND"} />
-        </Switch>
-      </BrowserRouter>
-  )
-}
+const App = () => {
+	return (
+		<BrowserRouter>
+			<ReactRouterGlobalHistory />
+			<Switch>
+				<AuthContainer path='/auth' component={AuthLayout} />
+				<DashboardContainer path='/' component={DashboardLayout} />
+				<Route path='*' component={() => '404 NOT FOUND'} />
+			</Switch>
+		</BrowserRouter>
+	);
+};
 
-export default App
+export default App;
