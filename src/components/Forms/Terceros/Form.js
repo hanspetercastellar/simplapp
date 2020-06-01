@@ -169,11 +169,7 @@ const FormNewTercero = () => {
 				resolve(filterColors(inputValue));
 			}, 1000);
 		});
-	const tooltip = (
-		<Tooltip>
-			This is a help <i>tooltip</i> .
-		</Tooltip>
-	);
+
 	return (
 		<>
 			<Progress isAnimating={isLoading} />
@@ -322,11 +318,18 @@ const FormNewTercero = () => {
 												<Form.Label>Numero</Form.Label>
 												<small> (Requerido)</small>
 												<Whisper
-													placement='top'
+													placement='right'
 													trigger='hover'
-													speaker={tooltip}
+													speaker={
+														<Tooltip visible={true}>
+															Codigo de verificacion
+														</Tooltip>
+													}
 												>
-													<Icon icon='question2' />
+													<span className='cv'>
+														CV: <span className='mr-2'>{cv}</span>
+														<Icon icon='question2' />
+													</span>
 												</Whisper>
 
 												<Form.Control
