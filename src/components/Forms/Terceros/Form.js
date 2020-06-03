@@ -17,33 +17,17 @@ import {
 	Row,
 } from 'react-bootstrap';
 import './Form.css';
-import { Icon, Tooltip, Whisper } from 'rsuite';
+
+
+import { Icon, Tooltip, Whisper, SelectPicker } from 'rsuite';
+
+//vars
+import { tipoTerceroCheck } from '../../../Vars/common/utilites'
+
 
 //Instancias
 const Api = new ApiController();
-//vars
-const tipoTerceroCheck = [
-	{
-		label: 'Proveedor',
-		isChecked: false,
-		tipo: 1,
-	},
-	{
-		label: 'Cliente',
-		isChecked: true,
-		tipo: 2,
-	},
-	{
-		label: 'Distribuidor',
-		isChecked: false,
-		tipo: 3,
-	},
-	{
-		label: 'Otro',
-		isChecked: false,
-		tipo: 4,
-	},
-];
+
 
 const style = {};
 
@@ -58,6 +42,7 @@ const FormNewTercero = () => {
 	const [otroSelected, setOtroselected] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [cv, setCv] = useState('');
+	const [puc, setPuc] = useState([]);
 
 	const [FormData, setFormData] = useState({
 		departamentos: {
@@ -114,6 +99,7 @@ const FormNewTercero = () => {
 
 		setIsLoading(false);
 		console.log(puc);
+		
 	}
 
 	async function getCiudadesXdepto(deptoID) {
@@ -157,18 +143,23 @@ const FormNewTercero = () => {
 		}
 	};
 
-	const filterColors = inputValue => {
-		return puc.filter(i =>
-			i.Codigo.toLowerCase().includes(inputValue.toLowerCase())
-		);
-	};
+	const handleUpdatePuc = async () => {
+		var res = {}
+		if(puc.length == 0) {
+		   res = await Api.getPuc()
+		   var res2=[]
+		   res.map((el)=> {
+				res2.push({"label":el.codigo})
+		   })
+			
 
-	const promiseOptions = inputValue =>
-		new Promise(resolve => {
-			setTimeout(() => {
-				resolve(filterColors(inputValue));
-			}, 1000);
-		});
+		   console.log(res2)
+		   setPuc(res2)
+		}
+		
+	}
+
+
 
 	return (
 		<>
@@ -182,7 +173,7 @@ const FormNewTercero = () => {
 								<div>
 									<FormLabel>Tipo de Tercero</FormLabel>
 									<Row className='contentCheckbox'>
-										{tipoTerceroCheck.map((tipo, i) => (
+										{tipoTerceroCheck().map((tipo, i) => (
 											<Col key={i}>
 												<div className='mb-3'>
 													<Form.Check id={`check-api-checkbox_${tipo.tipo}`}>
@@ -296,7 +287,7 @@ const FormNewTercero = () => {
 									)}
 									<Row>
 										<Col sm={'12'} md={'6'}>
-											<Form.Group controlId='exampleForm.SelectCustom'>
+											<Form.Group >
 												<Form.Label>Tipo de Identificacion</Form.Label>
 												<small> (Requerido)</small>
 												<Form.Control
@@ -314,7 +305,7 @@ const FormNewTercero = () => {
 											</Form.Group>
 										</Col>
 										<Col sm={'12'} md={'6'}>
-											<Form.Group controlId='exampleForm.SelectCustom'>
+											<Form.Group >
 												<Form.Label>Numero</Form.Label>
 												<small> (Requerido)</small>
 												<Whisper
@@ -347,19 +338,23 @@ const FormNewTercero = () => {
 									</Row>
 									<Row>
 										<Col md={'12'} sm={'12'}>
-											<Form.Group controlId='exampleForm.SelectCustom'>
+											<Form.Group >
 												<Form.Label>Cuenta Contable</Form.Label>
-												<AsyncSelect
-													cacheOptions
-													defaultOptions
-													loadOptions={promiseOptions}
-												/>
+											
 											</Form.Group>
+											<SelectPicker
+													data={puc}
+													style={{ width: 224 }}
+													onOpen={handleUpdatePuc}
+													onSearch={handleUpdatePuc}
+													menuClassNamw="menuCustom"
+													
+												/>
 										</Col>
 									</Row>
 									<Row>
 										<Col md={'12'} sm={'12'}>
-											<Form.Group controlId='exampleForm.SelectCustom'>
+											<Form.Group >
 												<Form.Label>Nombre Comercial</Form.Label>
 												<Form.Control
 													name={'nombre_comercial'}
@@ -380,7 +375,7 @@ const FormNewTercero = () => {
 								<div>
 									<Row>
 										<Col sm={'12'} md={'6'}>
-											<Form.Group controlId='exampleForm.SelectCustom'>
+											<Form.Group >
 												<Form.Label>Departamento</Form.Label>
 												<Form.Control
 													as='select'
@@ -393,7 +388,7 @@ const FormNewTercero = () => {
 											</Form.Group>
 										</Col>
 										<Col sm={'12'} md={'6'}>
-											<Form.Group controlId='exampleForm.SelectCustom'>
+											<Form.Group >
 												<Form.Label>Ciudad</Form.Label>
 												<Form.Control
 													as='select'
@@ -407,7 +402,7 @@ const FormNewTercero = () => {
 									</Row>
 									<Row>
 										<Col md={'6'} sm={'12'}>
-											<Form.Group controlId='exampleForm.SelectCustom'>
+											<Form.Group >
 												<Form.Label>Direccion</Form.Label>
 												<Form.Control
 													name={'direccion'}
@@ -417,7 +412,7 @@ const FormNewTercero = () => {
 											</Form.Group>
 										</Col>
 										<Col md={'6'} sm={'12'}>
-											<Form.Group controlId='exampleForm.SelectCustom'>
+											<Form.Group >
 												<Form.Label>Telefono</Form.Label>
 												<Form.Control
 													name={'telefono'}

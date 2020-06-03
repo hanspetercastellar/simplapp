@@ -4,8 +4,9 @@ import App from './App';
 import  store from './redux/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'rsuite/dist/styles/rsuite-default.css';
 const Application = () =>  (
     <Provider store={store}>
         <App />
